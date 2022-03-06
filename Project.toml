@@ -3,6 +3,10 @@ uuid = "079c61a7-eb9a-47bf-8e92-46d5acc7f564"
 authors = ["Donghoon Lee <mdhe1248@gmail.com> and contributors"]
 version = "0.1.0"
 
+[deps]
+DelimitedFiles = "8bb1440f-4735-579b-a4ab-409b98df4dab"
+PyCall = "438e738f-606a-5dbb-bf0a-cddfbfd45ab0"
+
 [compat]
 julia = "1"
 

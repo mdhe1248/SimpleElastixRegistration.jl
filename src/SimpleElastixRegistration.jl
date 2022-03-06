@@ -7,7 +7,7 @@ export prepare_elastix_registration, prepare_elastix_transformix, load_points
 """ Prepare for elastix registration
 `Params` is a tuple of parameters or of files that includes parameters.
 """
-function prepare_elastix_registration(outputdir, fixed, moving, params::Tuple)
+function prepare_elastix_registration(sitk, outputdir, fixed, moving, params::Tuple)
   elastixImageFilter = sitk.ElastixImageFilter()
   elastixImageFilter.SetFixedImage(fixed)
   elastixImageFilter.SetMovingImage(moving)
@@ -23,12 +23,12 @@ function prepare_elastix_registration(outputdir, fixed, moving, params::Tuple)
   isdir(outputdir) ? nothing : mkdir(outputdir); elastixImageFilter.SetOutputDirectory(outputdir)
   return(elastixImageFilter)
 end
-prepare_elastix_registration(outputdir, fixed, moving, param::String) = prepare_elastix_registration(outputdir, fixed, moving, (param,))
+prepare_elastix_registration(sitk, outputdir, fixed, moving, param::String) = prepare_elastix_registration(outputdir, fixed, moving, (param,))
 
 """ Add manual points to help registration
 'fixedpts_fn' and 'mvpts_fn' follow the point format of Simpleelastix.
 """
-function prepare_elastix_registration(outputdir, fixed, moving, params::Tuple, fixedpts_fn::String, mvpts_fn::String)
+function prepare_elastix_registration(sitk, outputdir, fixed, moving, params::Tuple, fixedpts_fn::String, mvpts_fn::String)
   elastixImageFilter = sitk.ElastixImageFilter()
   elastixImageFilter.SetFixedImage(fixed)
   elastixImageFilter.SetMovingImage(moving)
@@ -53,7 +53,7 @@ end
 """ Prepare for elastix transformix: This is useful when transformation has been acquired by elastix registration.
 `tformfns` is a tuple of files that includes parameters.
 """
-function prepare_elastix_transformix(outputdir, moving, tformfns::Tuple)
+function prepare_elastix_transformix(sitk, outputdir, moving, tformfns::Tuple)
   transformixImageFilter = sitk.TransformixImageFilter()
   for (i, tformfn) in enumerate(tformfns)
     parameterMap = sitk.ReadParameterFile(tformfn)
@@ -67,7 +67,7 @@ function prepare_elastix_transformix(outputdir, moving, tformfns::Tuple)
   isdir(outputdir) ? nothing : mkdir(outputdir); transformixImageFilter.SetOutputDirectory(outputdir)
   return(transformixImageFilter)
 end
-prepare_elastix_transformix(outputdir, moving, tformfns::String) = prepare_elastix_transformix(outputdir, moving, (tformfn,))
+prepare_elastix_transformix(sitk, outputdir, moving, tformfns::String) = prepare_elastix_transformix(outputdir, moving, (tformfn,))
 
 """ load points from elastix outputpoint file"""
 function load_points(fn)

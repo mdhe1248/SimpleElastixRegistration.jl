@@ -42,8 +42,7 @@ function prepare_elastix_registration(outputdir, fixed, moving, params::Tuple, f
   end
   elastixImageFilter.SetParameterMap(parameterMapVector)
   elastixImageFilter.AddParameter("Metric", ("NormalizedMutualInformation", "CorrespondingPointsEuclideanDistanceMetric" ))
-  elastixImageFilter.SetParameter("Metric0Weight", "0.8")
-  elastixImageFilter.SetParameter("Metric1Weight", "0.2")
+  elastixImageFilter.SetParameter("Metric0Weight", "0.1")
   elastixImageFilter.SetFixedPointSetFileName(fixedpts_fn)
   elastixImageFilter.SetMovingPointSetFileName(mvpts_fn)
   isdir(outputdir) ? nothing : mkdir(outputdir); elastixImageFilter.SetOutputDirectory(outputdir)

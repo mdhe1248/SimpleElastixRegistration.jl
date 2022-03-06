@@ -1,10 +1,13 @@
 # SimpleElastixRegistration
 
-Simple elastix webpage:
+Simpleelastix webpage:
+
 https://simpleelastix.readthedocs.io/index.html
 
-Point-based QnA:
+Point-based Simpleelastix registration QnA:
+
 https://github.com/SuperElastix/SimpleElastix/issues/70
+
 https://github.com/SuperElastix/SimpleElastix/issues/176
 
 

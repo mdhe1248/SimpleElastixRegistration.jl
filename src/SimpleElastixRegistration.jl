@@ -28,7 +28,7 @@ prepare_elastix_registration(sitk, outputdir, fixed, moving, param::String) = pr
 """ Add manual points to help registration
 'fixedpts_fn' and 'mvpts_fn' follow the point format of Simpleelastix.
 """
-function prepare_elastix_registration(sitk, outputdir, fixed, moving, params::Tuple, fixedpts_fn::String, mvpts_fn::String)
+function prepare_elastix_registration(sitk, outputdir, fixed, moving, params::Tuple, metric0, metric1, fixedpts_fn::String, mvpts_fn::String)
   elastixImageFilter = sitk.ElastixImageFilter()
   elastixImageFilter.SetFixedImage(fixed)
   elastixImageFilter.SetMovingImage(moving)
@@ -42,7 +42,8 @@ function prepare_elastix_registration(sitk, outputdir, fixed, moving, params::Tu
   end
   elastixImageFilter.SetParameterMap(parameterMapVector)
   elastixImageFilter.AddParameter("Metric", ("NormalizedMutualInformation", "CorrespondingPointsEuclideanDistanceMetric" ))
-  elastixImageFilter.SetParameter("Metric0Weight", "0.1")
+  elastixImageFilter.SetParameter("Metric0Weight", metric0)
+  elastixImageFilter.SetParameter("Metric1Weight", metric1)
   elastixImageFilter.SetFixedPointSetFileName(fixedpts_fn)
   elastixImageFilter.SetMovingPointSetFileName(mvpts_fn)
   isdir(outputdir) ? nothing : mkdir(outputdir); elastixImageFilter.SetOutputDirectory(outputdir)

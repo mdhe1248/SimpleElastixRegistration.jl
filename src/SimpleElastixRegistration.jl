@@ -23,7 +23,7 @@ function prepare_elastix_registration(sitk, outputdir, fixed, moving, params::Tu
   isdir(outputdir) ? nothing : mkdir(outputdir); elastixImageFilter.SetOutputDirectory(outputdir)
   return(elastixImageFilter)
 end
-prepare_elastix_registration(sitk, outputdir, fixed, moving, param::String) = prepare_elastix_registration(outputdir, fixed, moving, (param,))
+prepare_elastix_registration(sitk, outputdir, fixed, moving, param::String) = prepare_elastix_registration(sitk, outputdir, fixed, moving, (param,))
 
 """ Add manual points to help registration
 'fixedpts_fn' and 'mvpts_fn' follow the point format of Simpleelastix.
@@ -67,7 +67,7 @@ function prepare_elastix_transformix(sitk, outputdir, moving, tformfns::Tuple)
   isdir(outputdir) ? nothing : mkdir(outputdir); transformixImageFilter.SetOutputDirectory(outputdir)
   return(transformixImageFilter)
 end
-prepare_elastix_transformix(sitk, outputdir, moving, tformfns::String) = prepare_elastix_transformix(outputdir, moving, (tformfn,))
+prepare_elastix_transformix(sitk, outputdir, moving, tformfns::String) = prepare_elastix_transformix(sitk, outputdir, moving, (tformfn,))
 
 """ load points from elastix outputpoint file"""
 function load_points(fn)

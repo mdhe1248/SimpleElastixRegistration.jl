@@ -21,9 +21,13 @@ run(`elastix -f $fixed -m $moving -p $param_affine -p $param_bspline -out $outdi
 # param_bspline : parameter file name.
 # outdir : output dir name. This should pre-exist.
 ```
-For more details, please see 
+For more details, please see:
+
 https://elastix.lumc.nl/
+
 https://elastix.lumc.nl/doxygen/commandlinearg.html
+
+https://elastix.lumc.nl/doxygen/parameter.html
 
 
 
